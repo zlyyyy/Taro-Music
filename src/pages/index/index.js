@@ -24,8 +24,10 @@ export default class Index extends Component {
         navigationBarTitleText: '首页'
     }
     componentWillMount () { 
-        search({ keywords: '海阔天空' }).then(res => {
-            console.log(res.data)
+        search({
+                keywords: '海阔天空' 
+            }).then(res => {
+            console.log(res)
         }).catch(err => console.log(err))
      }
 
