@@ -1,6 +1,6 @@
 {
 	"miniprogramRoot": "./dist",
-	"projectname": "myTaroApp",
+	"projectname": "Taro-music",
 	"description": "taro学习",
 	"appid": "touristappid",
 	"setting": {

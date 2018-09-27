@@ -1,5 +1,5 @@
 const config = {
-  projectName: 'myTaroApp',
+  projectName: 'Taro-music',
   date: '2018-9-18',
   designWidth: 750,
   deviceRatio: {

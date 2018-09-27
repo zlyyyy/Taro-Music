@@ -1,9 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { search } from '../../api/index'
-import './index.scss'
-import Search from '../../components/search/search'
+import './me.scss'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -25,16 +23,20 @@ export default class Index extends Component {
         navigationBarTitleText: '首页'
     }
     componentWillMount () { 
-        search({
-                keywords: '海阔天空' 
-            }).then(res => {
-            console.log(res)
-        }).catch(err => console.log(err))
      }
+
+    componentDidMount () { }
+  
+    componentWillUnmount () { }
+  
+    componentDidShow () { }
+  
+    componentDidHide () { }
+
     render () {
         return (
-        <View>
-            <Search></Search>
+        <View className='todo'>
+            <Text>Hello, World</Text>
         </View>
         )
     }
