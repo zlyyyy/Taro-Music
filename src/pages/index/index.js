@@ -1,23 +1,17 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Button } from '@tarojs/components'
+import { View, Swiper, SwiperItem } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { search } from '../../api/index'
+import { getBanner } from '../../api/index'
 import './index.scss'
 import Search from '../../components/search/search'
 
-import { add, minus, asyncAdd } from '../../actions/counter'
+import { setBanner } from '../../actions/home'
 
-@connect(({ counter }) => ({
-    counter
+@connect(({ home }) => ({
+    home
 }), (dispatch) => ({
-    add () {
-        dispatch(add())
-    },
-    dec () {
-        dispatch(minus())
-    },
-    asyncAdd () {
-        dispatch(asyncAdd())
+    setBanner (data) {
+        dispatch(setBanner(data))
     }
 }))
 export default class Index extends Component {
@@ -25,16 +19,33 @@ export default class Index extends Component {
         navigationBarTitleText: '首页'
     }
     componentWillMount () { 
-        search({
-                keywords: '海阔天空' 
-            }).then(res => {
+        getBanner().then(res => {
             console.log(res)
-        }).catch(err => console.log(err))
-     }
+            this.props.setBanner(res.banners)
+            console.log(this.props)
+        })
+    }
     render () {
         return (
         <View>
             <Search></Search>
+            <Swiper
+                className='test-h'
+                indicatorColor='#999'
+                indicatorActiveColor='#333'
+                circular
+                indicatorDots
+                autoplay>
+                <SwiperItem>
+                    <View className='demo-text-1'>1</View>
+                </SwiperItem>
+                <SwiperItem>
+                <View className='demo-text-2'>2</View>
+                </SwiperItem>
+                <SwiperItem>
+                <View className='demo-text-3'>3</View>
+                </SwiperItem>
+            </Swiper>
         </View>
         )
     }

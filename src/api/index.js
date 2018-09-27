@@ -5,3 +5,8 @@ export function search (params = {}) {
         params
     }) 
 }
+export function getBanner (params = {}) { 
+       return http.get('/banner', {
+        params
+    }) 
+}
