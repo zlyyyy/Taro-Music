@@ -6,9 +6,6 @@ import searchPng from '../../asset/images/search_icon.png'
 import playerPng from '../../asset/images/player.png'
 
 export default class Index extends Component {
-    config = {
-        navigationBarTitleText: '首页'
-    }
     render () {
         return (
             <View className='search flex-wrp'>

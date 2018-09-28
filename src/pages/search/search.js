@@ -7,16 +7,6 @@ export default class Index extends Component {
     config = {
         navigationBarTitleText: '首页'
     }
-    componentWillMount () { 
-     }
-
-    componentDidMount () { }
-  
-    componentWillUnmount () { }
-  
-    componentDidShow () { }
-  
-    componentDidHide () { }
 
     render () {
         return (

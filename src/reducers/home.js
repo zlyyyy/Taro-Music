@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   banner: []
 }
 
-export default function counter (state = INITIAL_STATE, action) {
+export default function home (state = INITIAL_STATE, action) {
     switch (action.type) {
         case SET_BANNER:
         return {
