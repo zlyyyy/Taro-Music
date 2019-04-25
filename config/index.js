@@ -1,6 +1,6 @@
 const config = {
-  projectName: 'Taro-music',
-  date: '2018-9-18',
+  projectName: 'taro-music',
+  date: '2019-4-25',
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,

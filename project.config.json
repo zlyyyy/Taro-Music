@@ -1,15 +1,18 @@
 {
-	"miniprogramRoot": "./dist",
-	"projectname": "Taro-music",
+	"miniprogramRoot": "dist/",
+	"projectname": "taro-music",
 	"description": "taro学习",
-	"appid": "touristappid",
+	"appid": "wxc4fcf1dc29e8f8f0",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
-		"newFeature": true
+		"newFeature": true,
+		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {}
 }
