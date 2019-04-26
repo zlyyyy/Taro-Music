@@ -1,0 +1,46 @@
+.music-infor{
+    width: 100%;
+    .music-infor-name{
+        display: inline-block;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 60px;
+        text-align: center;
+        color: #333;
+        width: 100%;
+        height: 60px;
+    }
+    .music-infor-author{
+        display: inline-block;
+        font-size: 28px;
+        line-height: 60px;
+        text-align: center;
+        color: #666;
+        width: 100%;
+        height: 60px;
+    }
+    .music-infor-img{
+        display: inline-block;
+        margin: 20px 0;
+        width: 100%;
+        text-align: center;
+        image{
+            width: 360px;
+            height: 360px;
+        }
+    }
+    .music-handle{
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        border: 1px solid #DCDFE6;
+        text-align: center;
+        padding: 25px;
+        box-sizing: border-box;
+        border-radius: 120px;
+        image{
+            width: 70px;
+            height: 70px;
+        }
+    }
+}

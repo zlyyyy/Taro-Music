@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Input, Image, Button } from '@tarojs/components'
+import { View, Text, Input, Image, Icon } from '@tarojs/components'
 import './index.scss'
-import searchPng from '../../asset/images/search.png'
 
 export default class Index extends Component {
 
@@ -22,7 +21,8 @@ export default class Index extends Component {
 
 	componentDidMount () { 
 		// 获取远程数据
-		Taro.showLoading({ title: '加载中' })
+        Taro.showLoading({ title: '加载中' })
+        // 获取热门歌曲
 		Taro.request({
 		  	url: 'http://api.zhaoly.cn/search/hot'
 		}).then(res => {
@@ -35,7 +35,6 @@ export default class Index extends Component {
 					hotList: res.data.result.hots
 				})
 			}
-			
 		})
 	}
 
@@ -43,20 +42,55 @@ export default class Index extends Component {
 
 	componentDidShow () { }
 
-	componentDidHide () { }
+    componentDidHide () { }
+    // 搜索框同步修改实践
 	setSearchValue = (e) => {
 		const {value} = e.target
 		this.setState({
 			searchValue: value
 		})
-	}
+    }
+    // 清空搜索框
+    clearSearchValue = () => {
+		this.setState({
+            searchValue: '',
+            musicList: []
+		})
+    }
+    // 热门歌曲点击事件
 	handleHotClick = (value, e) => {
+        console.log(value)
 		this.setState({
 			searchValue: value
         })
-		this.searchMusic(value)
-	}
+        this.searchMusic(value)
+    }
+    // 音乐跳转
+    musicPlayJump = (item, e) => {
+        const { id } = item
+        Taro.request({
+			url: 'http://api.zhaoly.cn/check/music',
+			data: {
+				id
+			}
+		}).then(res => {
+            Taro.hideLoading()
+            if(res.statusCode == 404){
+                Taro.showToast({
+                    title: res.data.message,
+                    icon: 'none',
+                    duration: 2000
+                  })
+            }else{
+                Taro.navigateTo({
+                    url: `/pages/music/music?item=${JSON.stringify(item)}`
+                })
+            }
+		})
+    }
+    // 搜索事件
 	searchMusic = (keywords, e) => {
+        console.log(this.state)
 		if (this.state.loading) {
 		  return
 		}
@@ -111,12 +145,13 @@ export default class Index extends Component {
 		return (
 		<View>
 			<View className='search'>
-				<View className='search-content'>
+				<View className={['search-content', this.state.searchValue == ''? null : 'active'].join(' ')}>
 					<View className='search-left'>
-						<Image src={searchPng}></Image>
+                        <Icon className='search-icon' size='18' type='search' />
 					</View>
 					<View className='search-right'>
 						<Input
+                            value={this.searchValue}
 							onInput={this.setSearchValue}
 							onConfirm={this.searchMusic.bind(this, this.state.searchValue)}
 							confirmType='搜索'
@@ -124,8 +159,18 @@ export default class Index extends Component {
 							placeholder={'搜索歌曲、专辑、歌手'}
 							placeholderClass='search-placeholder' 
 							/>
+                        {
+                            this.state.searchValue != ''
+                            ?   <View className='search-clear' onClick={this.clearSearchValue}>
+                                    <Icon className='search-clear-icon' size='18' type='clear'/>
+                                </View>
+                                : null
+                        }
 					</View>
 				</View>
+                {
+                    this.state.searchValue != ''? <Text className='search-value-clear' onClick={this.clearSearchValue}>取消</Text> : null
+                }
 			</View>
 			{
 				this.state.searchValue == '' && this.state.musicList.length == 0
@@ -157,13 +202,14 @@ export default class Index extends Component {
 						: this.state.musicList.map((item, index) => {
 							return <View
 								className='search-list-item'
-								key={`${item.name}${index}`}
+                                key={`${item.name}${index}`}
+                                onClick={this.musicPlayJump.bind(this, item)}
 								>
 									<View className='search-list-item-img'>
 										<Image src={item.album.picUrl}></Image>
 									</View>
 									<View className='search-list-item-infor'>
-										<Text className='search-list-item-name'>{item.name}</Text>
+										<Text className='search-list-item-name ellipsis'>{item.name}</Text>
 										<Text className='search-list-item-author'>{item.artists}</Text>
 									</View>
 								</View>
