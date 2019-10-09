@@ -24,7 +24,7 @@ export default class Index extends Component {
         Taro.showLoading({ title: '加载中' })
         // 获取热门歌曲
 		Taro.request({
-		  	url: 'http://api.zhaoly.cn/search/hot'
+		  	url: 'https://api.zhaoly.cn/search/hot'
 		}).then(res => {
 			Taro.hideLoading()
 			if (res.data.code == 200) {
@@ -69,7 +69,7 @@ export default class Index extends Component {
     musicPlayJump = (item, e) => {
         const { id } = item
         Taro.request({
-			url: 'http://api.zhaoly.cn/check/music',
+			url: 'https://api.zhaoly.cn/check/music',
 			data: {
 				id
 			}
@@ -97,7 +97,7 @@ export default class Index extends Component {
 		this.state.loading = true
 		Taro.showLoading({title: '搜索中'})
 		Taro.request({
-			url: 'http://api.zhaoly.cn/search',
+			url: 'https://api.zhaoly.cn/search',
 			data: {
 				keywords,
 				limit: 10
